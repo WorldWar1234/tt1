@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-'use strict'
-const app = require('express')()
-const authenticate = require('./src/authenticate')
-const params = require('./src/params')
-const proxy = require('./src/proxy')
-const spdy = require('spdy')
-const fs = require('fs')
+'use strict';
+const app = require('express')();
+const authenticate = require('./src/authenticate');
+const params = require('./src/params');
+const proxy = require('./src/proxy');
+const spdy = require('spdy');
+const fs = require('fs');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 if (cluster.isMaster) {
