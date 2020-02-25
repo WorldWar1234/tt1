@@ -21,7 +21,7 @@ if (cluster.isMaster) {
         cluster.fork()
     });
 } else {
-    const PORT = process.env.PORT || 8080
+    const PORT = process.env.PORT || 8080;
     const options = {
 
         // **optional** SPDY-specific options
@@ -42,8 +42,8 @@ if (cluster.isMaster) {
         }
     };
 
-    app.enable('trust proxy')
-    app.get('/', authenticate, params, proxy)
-    app.get('/favicon.ico', (req, res) => res.status(204).end())
-    spdy.createServer(options, app).listen(PORT, () => console.log(`Listening on ${PORT}`))
+    app.enable('trust proxy');
+    app.get('/', authenticate, params, proxy);
+    app.get('/favicon.ico', (req, res) => res.status(204).end());
+    spdy.createServer(options, app).listen(PORT, () => console.log(`Listening on ${PORT}`));
 }
