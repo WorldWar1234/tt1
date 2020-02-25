@@ -6,8 +6,23 @@ const params = require('./src/params')
 const proxy = require('./src/proxy')
 const spdy = require('spdy')
 const fs = require('fs')
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
+if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
 
-var options = {
+  // Fork workers.
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+    cluster.fork()
+  });
+} else {
+const PORT = process.env.PORT || 8080
+const options = {
 
   // **optional** SPDY-specific options
   spdy: {
@@ -19,25 +34,16 @@ var options = {
     ssl: false,
     plain: true,
 
-    // **optional**
-    // Parse first incoming X_FORWARDED_FOR frame and put it to the
-    // headers of every request.
-    // NOTE: Use with care! This should not be used without some proxy that
-    // will *always* send X_FORWARDED_FOR
-    'x-forwarded-for': true,
-
     connection: {
       windowSize: 1024 * 1024, // Server's window size
-
       // **optional** if true - server will send 3.1 frames on 3.0 *plain* spdy
       autoSpdy31: true
     }
   }
 };
-const PORT = process.env.PORT || 8080
 
 app.enable('trust proxy')
 app.get('/', authenticate, params, proxy)
 app.get('/favicon.ico', (req, res) => res.status(204).end())
 spdy.createServer(options, app).listen(PORT, () => console.log(`Listening on ${PORT}`))
-//app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+}
