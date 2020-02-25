@@ -11,7 +11,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "basic-auth": "^2.0.0",
+    "basic-auth": "^2.0.1",
     "express": "4.16.2",
     "lodash": "^4.17.13",
     "request": "^2.83.0",
