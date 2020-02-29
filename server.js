@@ -30,9 +30,6 @@ if (cluster.isMaster) {
         ssl = {
             key: fs.readFileSync(keyPath),
             cert: fs.readFileSync(certPath),
-            ciphers: "ECDHE-RSA-AES256-SHA384:AES256-SHA256:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM",
-            secureOptions: require('constants').SSL_OP_CIPHER_SERVER_PREFERENCE,
-            secureProtocol: 'TLSv1_2_method',
         };
         plain = false;
     }
@@ -44,7 +41,6 @@ if (cluster.isMaster) {
             protocols: ['h2', 'spdy/3.1', 'http/1.1'],
             ssl: ssl,
             plain: plain,
-
             connection: {
                 windowSize: 1024 * 1024, // Server's window size
                 // **optional** if true - server will send 3.1 frames on 3.0 *plain* spdy
