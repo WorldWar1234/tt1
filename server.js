@@ -19,21 +19,36 @@ if (cluster.isMaster) {
     });
 } else {
     const PORT = process.env.PORT || 8080;
+
+    // Turn on SSL if possible, but run http2c if not.
+    // http2c makes if SSL is offloaded.
+    const keyPath = './cert/privkey.pem';
+    const certPath = './cert/fullchain.pem';
+    let ssl = false;
+    let plain = true;
+    if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
+        ssl = {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certPath),
+            ciphers: "ECDHE-RSA-AES256-SHA384:AES256-SHA256:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM",
+            secureOptions: require('constants').SSL_OP_CIPHER_SERVER_PREFERENCE,
+            secureProtocol: 'TLSv1_2_method',
+        };
+        plain = false;
+    }
+
     const options = {
 
         // **optional** SPDY-specific options
         spdy: {
             protocols: ['h2', 'spdy/3.1', 'http/1.1'],
-            // ssl doesn't make sense when we have ssl termination.
-            // key: fs.readFileSync(__dirname + '/keys/spdy-key.pem'),
-            // Fullchain file or cert file (prefer the former)
-            // cert: fs.readFileSync(__dirname + '/keys/spdy-fullchain.pem'),
-            ssl: false,
-            plain: true,
+            ssl: ssl,
+            plain: plain,
 
             connection: {
                 windowSize: 1024 * 1024, // Server's window size
                 // **optional** if true - server will send 3.1 frames on 3.0 *plain* spdy
+                // helpful for best performance behind SSL offload.
                 autoSpdy31: true
             }
         }
