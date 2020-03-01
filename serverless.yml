@@ -1,6 +1,8 @@
 ---
+app: bandwidth-hero
 service: proxy
 org: jsnshrmn
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -8,7 +10,7 @@ provider:
   region: us-east-1
 
 functions:
-app: bandwidth-hero
+  proxy:
     handler: app.handler
     events:
       - http: GET /
