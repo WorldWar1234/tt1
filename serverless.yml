@@ -1,5 +1,5 @@
 ---
-service: bandwidth-hero-proxy
+service: proxy
 
 provider:
   name: aws
