@@ -8,8 +8,7 @@ provider:
   region: us-east-1
 
 functions:
-  app:
-    handler: serverless.handler
+app: bandwidth-hero
     events:
       - http: GET /
       - http: GET /favicon.ico
