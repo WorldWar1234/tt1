@@ -14,7 +14,7 @@
     "cache-manager": "^2.6.0",
     "cache-manager-fs-binary": "^1.0.4",
     "cluster": "^0.7.7",
-    "express": "4.17.1",
+    "express": "^4.17.1",
     "lodash": "^4.17.13",
     "node-fetch": "^2.6.0",
     "serverless-http": "^2.3.2",

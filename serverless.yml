@@ -11,7 +11,7 @@ provider:
 
 functions:
   proxy:
-    handler: app.handler
+    handler: serverless.handler
     events:
       - http:
           path: /{proxy+}
