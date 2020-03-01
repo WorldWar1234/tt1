@@ -9,6 +9,7 @@ provider:
 
 functions:
 app: bandwidth-hero
+    handler: app.handler
     events:
       - http: GET /
       - http: GET /favicon.ico
