@@ -13,7 +13,9 @@ functions:
   proxy:
     handler: app.handler
     events:
-      - http: 'ANY {proxy+}'
+      - http:
+          path: /{proxy+}
+          method: ANY
     # Not particularly secure, but better than an open proxy.
     environment:
       LOGIN: ${param:LOGIN}
