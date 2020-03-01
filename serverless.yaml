@@ -1,0 +1,19 @@
+---
+service: bandwidth-hero-proxy
+
+provider:
+  name: aws
+  runtime: nodejs12.16
+  stage: dev
+  region: us-east-1
+
+functions:
+  app:
+    handler: serverless.handler
+    events:
+      - http: GET /
+      - http: GET /favicon.ico
+    # Not particularly secure, but better than an open proxy.
+    environment:
+      LOGIN: ${env:LOGIN}
+      PASSWORD: ${env:PASSWORD}

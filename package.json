@@ -17,6 +17,7 @@
     "express": "4.17.1",
     "lodash": "^4.17.13",
     "node-fetch": "^2.6.0",
+    "serverless-http": "^2.3.2",
     "sharp": "^0.24.1",
     "spdy": "^3.4.7"
   },
