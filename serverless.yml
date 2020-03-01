@@ -13,8 +13,7 @@ functions:
   proxy:
     handler: app.handler
     events:
-      - http: GET /
-      - http: GET /favicon.ico
+      - http: 'ANY {proxy+}'
     # Not particularly secure, but better than an open proxy.
     environment:
       LOGIN: ${param:LOGIN}
