@@ -15,5 +15,5 @@ functions:
       - http: GET /favicon.ico
     # Not particularly secure, but better than an open proxy.
     environment:
-      LOGIN: ${env:LOGIN}
-      PASSWORD: ${env:PASSWORD}
+      LOGIN: ${param:LOGIN}
+      PASSWORD: ${param:PASSWORD}
