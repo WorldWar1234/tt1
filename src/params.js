@@ -8,7 +8,7 @@ function params(req, res, next) {
     url = url.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, 'http://');
     req.params.url = url;
     req.params.webp = !req.query.jpeg;
-    req.params.grayscale = req.query.bw !== 0;
+    req.params.grayscale = req.query.bw != 0;
     req.params.quality = parseInt(req.query.l, 10) || DEFAULT_QUALITY;
 
     next()
