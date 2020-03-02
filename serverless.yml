@@ -35,3 +35,15 @@ functions:
     environment:
       LOGIN: ${param:LOGIN}
       PASSWORD: ${param:PASSWORD}
+
+resources:
+  Resources:
+    GatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.WWW-Authenticate: "'Basic realm=\"Bandwidth-Hero Compression Service\"'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'

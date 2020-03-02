@@ -32,18 +32,7 @@ module.exports = (event, context, callback) => {
             // if everything is good, save to request for use in other routes
             return callback(null, generatePolicy(LOGIN, 'Allow', event.methodArn))
         } else {
-            const response = {
-                status: '401',
-                statusDescription: 'Unauthorized',
-                body: 'Unauthorized',
-                headers: {
-                    'www-authenticate': [{
-                        key: 'WWW-Authenticate',
-                        value: 'Basic realm="Bandwidth-Hero Compression Service'
-                    }]
-                },
-            };
-            callback(null, response);
+            return callback('Unauthorized');
         }
     }
     callback();
