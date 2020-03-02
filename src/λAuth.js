@@ -37,7 +37,10 @@ module.exports = (event, context, callback) => {
                 statusDescription: 'Unauthorized',
                 body: 'Unauthorized',
                 headers: {
-                    'www-authenticate': [{key: 'WWW-Authenticate', value:'Basic realm="Bandwidth-Hero Compression Service'}]
+                    'www-authenticate': [{
+                        key: 'WWW-Authenticate',
+                        value: 'Basic realm="Bandwidth-Hero Compression Service'
+                    }]
                 },
             };
             callback(null, response);
