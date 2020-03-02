@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 'use strict';
-const app = require('./app.js');
-const spdy = require('spdy');
-const fs = require('fs');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
 
@@ -19,6 +17,10 @@ if (cluster.isMaster) {
     });
 } else {
     const PORT = process.env.PORT || 8080;
+    const app = require('./app.js');
+    const spdy = require('spdy');
+    const fs = require('fs');
+
 
     // Turn on SSL if possible, but run http2c if not.
     // http2c makes if SSL is offloaded.
