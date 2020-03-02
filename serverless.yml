@@ -11,11 +11,26 @@ provider:
 
 functions:
   proxy:
-    handler: serverless.handler
+    handler: serverless.app
     events:
+      - http:
+          path: /
+          method: ANY
+          authorizer:
+            name: auth
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+            type: request
       - http:
           path: /{proxy+}
           method: ANY
+          authorizer:
+            name: auth
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+            type: request
+  auth:
+    handler: serverless.auth
     # Not particularly secure, but better than an open proxy.
     environment:
       LOGIN: ${param:LOGIN}
