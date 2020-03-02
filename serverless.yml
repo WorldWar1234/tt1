@@ -8,6 +8,9 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: us-east-1
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
 
 functions:
   proxy:
@@ -21,14 +24,8 @@ functions:
             resultTtlInSeconds: 0
             identitySource: method.request.header.Authorization
             type: request
-      - http:
-          path: /{proxy+}
-          method: ANY
-          authorizer:
-            name: auth
-            resultTtlInSeconds: 0
-            identitySource: method.request.header.Authorization
-            type: request
+            response:
+              contentHandling: CONVERT_TO_BINARY
   auth:
     handler: serverless.auth
     # Not particularly secure, but better than an open proxy.
