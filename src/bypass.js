@@ -6,4 +6,4 @@ function bypass(req, res, buffer) {
     res.end()
 }
 
-module.exports = bypass
+module.exports = bypass;

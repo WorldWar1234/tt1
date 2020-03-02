@@ -10,8 +10,6 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "cache-manager": "^2.6.0",
-    "cache-manager-fs-binary": "^1.0.4",
     "cluster": "^0.7.7",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
