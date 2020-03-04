@@ -1,6 +1,4 @@
-# Bandwidth Hero Data Compression Service
-
-[![NSP Status](https://nodesecurity.io/orgs/bandwidth-hero/projects/1f035cf0-00f2-43db-9bc0-8e39adb24642/badge)](https://nodesecurity.io/orgs/bandwidth-hero/projects/1f035cf0-00f2-43db-9bc0-8e39adb24642)
+# Bandwidth Hero Data Compression Core
 
 This data compression service is used by
 [Bandwidth Hero](https://github.com/ayastreb/bandwidth-hero) browser extension. It compresses given
@@ -19,7 +17,7 @@ and user's IP address through to the origin host.
 
 You can deploy this service to Heroku:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jsnshrmn/bandwidth-hero-proxy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/PrairieOps/bandwidth-hero-core/blob/master/server/)
 
 [![Deploy to Heroku guide](http://img.youtube.com/vi/y3tkYEXAics/0.jpg)](http://www.youtube.com/watch?v=y3tkYEXAics)
 

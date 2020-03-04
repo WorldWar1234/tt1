@@ -1,0 +1,37 @@
+{
+  "name": "bandwidth-hero-core",
+  "version": "0.1.0",
+  "description": "Data compression service that converts images to low-res WebP or JPEG on the fly; forked from Anatoliy Yastreb's bandwidth-hero-core.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
+    "lodash.pick": "^4.4.0",
+    "node-fetch": "^2.6.0",
+    "sharp": "^0.24.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrairieOps/bandwidth-hero-core.git"
+  },
+  "keywords": [
+    "compression",
+    "data saving",
+    "compress image",
+    "webp",
+    "data-saver",
+    "turbo",
+    "proxy",
+    "bandwidth"
+  ],
+  "author": "Jason Sherman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PrairieOps/bandwidth-hero-core/issues"
+  },
+  "homepage": "https://github.com/PrairieOps/bandwidth-hero-core#readme"
+}

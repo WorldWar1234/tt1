@@ -17,7 +17,7 @@ if (cluster.isMaster) {
     });
 } else {
     const PORT = process.env.PORT || 8080;
-    const app = require('./app.js');
+    const app = require('../app');
     const spdy = require('spdy');
     const fs = require('fs');
 

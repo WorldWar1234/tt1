@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
-const pick = require('lodash').pick;
+// TODO: drop lodash.pick in favor of a native destructure.
+const pick = require('lodash.pick');
 const shouldCompress = require('./shouldCompress');
 const redirect = require('./redirect');
 const compress = require('./compress');
