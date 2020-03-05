@@ -7,6 +7,7 @@ const bypass = require('./bypass');
 const copyHeaders = require('./copyHeaders');
 
 function proxy(req, res) {
+    console.log('proxy!');
     fetch(
         req.params.url,
         {

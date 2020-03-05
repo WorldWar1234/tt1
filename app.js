@@ -2,20 +2,28 @@
 'use strict';
 const params = require('./src/params');
 const proxy = require('./src/proxy');
-const app = require('express')();
+// Use basic auth middleware if we have credentials on hand
 const LOGIN = process.env.LOGIN;
 const PASSWORD = process.env.PASSWORD;
-app.enable('trust proxy');
-// Use basic auth middleware if we have credentials on hand
+let app;
 if (LOGIN && PASSWORD) {
-    const basicAuth = require('express-basic-auth');
-    app.use(basicAuth({
-        users: { [LOGIN]: PASSWORD },
-        challenge: true,
-        realm: 'Bandwidth-Hero Compression Service'
-    }));
+    const basicAuth = require('./src/basicAuth');
+
+    app = (req, res) => {
+        basicAuth({
+            users: {[LOGIN]: PASSWORD},
+            challenge: true,
+            realm: 'Bandwidth-Hero Compression Service'
+        })(req, res, () => (params(req, res, proxy)))
+    };
+
+} else {
+    app = (req, res) => {
+        params(req, res, proxy);
+    };
 }
-app.get('/', params, proxy);
-app.get('/favicon.ico', (req, res) => res.status(204).end());
+//app.enable('trust proxy');
+//app.get('/', params, proxy);
+//app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 module.exports = app;

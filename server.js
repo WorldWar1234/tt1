@@ -16,9 +16,9 @@ if (cluster.isMaster) {
         cluster.fork()
     });
 } else {
+
     const PORT = process.env.PORT || 8080;
     const app = require('./app.js');
-    const spdy = require('spdy');
     const fs = require('fs');
 
 
@@ -26,31 +26,15 @@ if (cluster.isMaster) {
     // http2c makes if SSL is offloaded.
     const keyPath = './cert/privkey.pem';
     const certPath = './cert/fullchain.pem';
-    let ssl = false;
-    let plain = true;
+    let options = {allowHTTP1: true};
     if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
-        ssl = {
+        options = {
             key: fs.readFileSync(keyPath),
             cert: fs.readFileSync(certPath),
         };
-        plain = false;
     }
 
-    const options = {
-
-        // **optional** SPDY-specific options
-        spdy: {
-            protocols: ['h2', 'spdy/3.1', 'http/1.1'],
-            ssl: ssl,
-            plain: plain,
-            connection: {
-                windowSize: 1024 * 1024, // Server's window size
-                // **optional** if true - server will send 3.1 frames on 3.0 *plain* spdy
-                // helpful for best performance behind SSL offload.
-                autoSpdy31: true
-            }
-        }
-    };
-
-    spdy.createServer(options, app).listen(PORT, () => console.log(`Listening on ${PORT}`));
+    const http2 = require('http2');
+    const server = http2.createSecureServer(options, app);
+    server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 }
