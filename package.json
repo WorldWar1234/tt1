@@ -23,3 +23,24 @@
     "node": "^12.16.1"
   }
 }
+"repository": {
+    "type": "git",
+    "url": "git+https://github.com/machman5/bandwidth-hero-core.git"
+  },
+  "keywords": [
+    "compression",
+    "data saving",
+    "compress image",
+    "webp",
+    "data-saver",
+    "turbo",
+    "proxy",
+    "bandwidth"
+  ],
+  "author": "Jason Sherman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PrairieOps/bandwidth-hero-core/issues"
+  },
+  "homepage": "https://github.com/PrairieOps/bandwidth-hero-core#readme"
+}
