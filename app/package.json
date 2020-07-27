@@ -1,20 +1,29 @@
 {
-  "name": "bandwidth-hero-core",
-  "version": "0.1.0",
-  "description": "Data compression service that converts images to low-res WebP or JPEG on the fly; forked from Anatoliy Yastreb's bandwidth-hero-core.",
-  "main": "index.js",
+  "name": "bandwidth-hero-proxy",
+  "main": "server.js",
+  "private": true,
+  "version": "1.0.3",
+  "description": "Data compression service that converts images to low-res WebP or JPEG on the fly. Used in Bandwidth-Hero browser extension.",
+  "author": "Anatoliy Yastreb",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server.js"
+    "start": "node server.js"
   },
   "dependencies": {
+    "cluster": "^0.7.7",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
-    "lodash.pick": "^4.4.0",
+    "lodash": "^4.17.13",
     "node-fetch": "^2.6.0",
-    "sharp": "^0.24.1"
+    "serverless-http": "^2.3.2",
+    "sharp": "^0.24.1",
+    "spdy": "^3.4.7"
   },
-  "repository": {
+  "engines": {
+    "node": "^12.16.1"
+  }
+}
+"repository": {
     "type": "git",
     "url": "git+https://github.com/machman5/bandwidth-hero-core.git"
   },
