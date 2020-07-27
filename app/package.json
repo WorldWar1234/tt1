@@ -4,10 +4,12 @@
   "private": true,
   "version": "1.0.3",
   "description": "Data compression service that converts images to low-res WebP or JPEG on the fly. Used in Bandwidth-Hero browser extension.",
-  "author": "Anatoliy Yastreb",
+  "main": "index.js",
+"author": "Anatoliy Yastreb",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+"test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server.js"
   },
   "dependencies": {
     "cluster": "^0.7.7",
