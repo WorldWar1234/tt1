@@ -1,0 +1,46 @@
+---
+app: bandwidth-hero
+service: proxy
+org: jsnshrmn
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
+
+functions:
+  proxy:
+    handler: serverless.app
+    events:
+      - http:
+          path: /
+          method: ANY
+          authorizer:
+            name: auth
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+            type: request
+            response:
+              contentHandling: CONVERT_TO_BINARY
+  auth:
+    handler: serverless.auth
+    # Not particularly secure, but better than an open proxy.
+    environment:
+      LOGIN: ${param:LOGIN}
+      PASSWORD: ${param:PASSWORD}
+
+resources:
+  Resources:
+    GatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.WWW-Authenticate: "'Basic realm=\"Bandwidth-Hero Compression Service\"'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'
