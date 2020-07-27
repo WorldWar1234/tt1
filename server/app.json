@@ -2,7 +2,7 @@
   "name": "bandwidth-hero-core",
   "description":
     "Data compression service that converts images to low-res WebP or JPEG on the fly; forked from Anatoliy Yastreb's bandwidth-hero-core.",
-  "repository": "https://github.com/machman5/bandwidth-hero-core/upload/dev-http2",
+  "repository": "https://github.com/machman5/bandwidth-hero-core/tree/dev-http2",
   "website": "https://bandwidth-hero.com",
   "logo": "https://bandwidth-hero.com/favicon-96x96.png",
   "keywords": ["proxy", "compression", "data saving", "compress image", "webp"],
