@@ -10,6 +10,19 @@ services:
         source: ./app
         target: /home/node/app
     command: yarn install
+  cli:
+    image: "docker.io/library/node:lts-alpine3.12"
+    user: "node"
+    working_dir: "/home/node/app"
+    volumes:
+      - type: bind
+        source: ./app
+        target: /home/node/app
+    depends_on:
+      - install
+    command: sh
+    stdin_open: true
+    tty: true
   app:
     image: "docker.io/library/node:lts-alpine3.12"
     user: "node"
