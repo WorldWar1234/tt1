@@ -4,7 +4,7 @@
   "description": "Data compression service that converts images to low-res WebP or JPEG on the fly; forked from Anatoliy Yastreb's bandwidth-hero-core.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node ./server.js"
   },
   "dependencies": {
@@ -33,5 +33,9 @@
   "bugs": {
     "url": "https://github.com/PrairieOps/bandwidth-hero-core/issues"
   },
-  "homepage": "https://github.com/PrairieOps/bandwidth-hero-core#readme"
+  "homepage": "https://github.com/PrairieOps/bandwidth-hero-core#readme",
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3"
+  }
 }
