@@ -1,0 +1,25 @@
+---
+version: "3.4"
+services:
+  install:
+    image: "docker.io/library/node:lts-alpine3.12"
+    user: "node"
+    working_dir: "/home/node/app"
+    volumes:
+      - type: bind
+        source: ./app
+        target: /home/node/app
+    command: yarn install
+  node:
+    image: "docker.io/library/node:lts-alpine3.12"
+    user: "node"
+    working_dir: "/home/node/app"
+    volumes:
+      - type: bind
+        source: ./app
+        target: /home/node/app
+    depends_on:
+      - install
+    command: yarn start
+    ports:
+      - "8080:8080"
