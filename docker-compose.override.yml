@@ -34,5 +34,7 @@ services:
     depends_on:
       - install
     command: yarn start
+    environment:
+      - DEBUG=express
     ports:
       - "8080:8080"
