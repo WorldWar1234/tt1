@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
-const params = require('./src/params');
+const paramsHeaders = require('./src/params.headers');
+const paramsQuery = require('./src/params.query');
+const paramsRewrite = require('./src/params.rewrite')
 const proxy = require('./src/proxy');
 const app = require('express')();
 const LOGIN = process.env.LOGIN;
@@ -15,7 +17,7 @@ if (LOGIN && PASSWORD) {
         realm: 'Bandwidth-Hero Compression Service'
     }));
 }
-app.get('/', params, proxy);
+app.get('/', paramsQuery, paramsRewrite, paramsHeaders, proxy);
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 module.exports = app;

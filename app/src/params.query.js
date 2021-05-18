@@ -1,6 +1,6 @@
 const DEFAULT_QUALITY = 1;
 
-function params(req, res, next) {
+function paramsQuery(req, res, next) {
     let url = req.query.url;
     if (Array.isArray(url)) url = url.join('&url=');
     if (!url) return res.end('bandwidth-hero-proxy');
@@ -14,4 +14,4 @@ function params(req, res, next) {
     next()
 }
 
-module.exports = params;
+module.exports = paramsQuery;
