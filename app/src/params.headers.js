@@ -1,6 +1,7 @@
 const DEFAULT_QUALITY = 1;
 
 function paramsHeaders(req, res, next) {
+
     const target = req.headers['x-bandwidth-hero-target'];
     if (!target) return res.end('bandwidth-hero-proxy');
     res.setHeader('x-bandwidth-hero-target', target);

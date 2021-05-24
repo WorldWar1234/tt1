@@ -3,11 +3,13 @@ const fetch = require('node-fetch');
 const pick = require('lodash.pick');
 const shouldCompress = require('./shouldCompress');
 const shouldRewrite = require("./shouldRewrite");
+const shouldProxy = require("./shouldProxy");
 const redirect = require('./redirect');
 const compress = require('./compress');
-const rewrite = require('./rewrite');
+const rewriteText = require('./rewriteText');
 const bypass = require('./bypass');
 const copyHeaders = require('./copyHeaders');
+const rewriteHeaders = require('./rewriteHeaders')
 
 function proxy(req, res) {
     fetch(
@@ -15,20 +17,34 @@ function proxy(req, res) {
         {
             headers: {
                 ...pick(req.headers, ['cookie', 'dnt', 'referer']),
-                'user-agent': 'Bandwidth-Hero Core',
+                //'user-agent': 'Bandwidth-Hero Core',
                 'x-forwarded-for': req.headers['x-forwarded-for'] || req.ip,
                 via: '1.1 bandwidth-hero'
             },
         })
         .then(origin => {
-            if (!origin.ok) {
+            // A terrible hack for PoC.
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('upgrade-insecure-requests', 0);
+            req.params.originType = origin.headers.get('content-type') || '';
+            if (!shouldProxy(origin.url)) {
                 return redirect(req, res);
             }
-            req.params.originType = origin.headers.get('content-type') || '';
             // text processing
             if (shouldRewrite(req)) {
-                origin.text().then(text => {
-                    rewrite(req, res, text);
+                origin.textConverted().then(text => {
+                    //copyHeaders(origin, res);
+                    //rewriteHeaders(req, res);
+                    rewriteHeaders(origin, res);
+                    res.removeHeader('content-encoding');
+                    res.removeHeader('access-control-allow-origin');
+                    res.removeHeader('content-security-policy');
+                    res.removeHeader('referrer-policy');
+                    res.removeHeader('permissions-policy');
+                    res.removeHeader('x-frame-options');
+                    res.removeHeader('x-content-options');
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    rewriteText(req, res, text);
                 });
             // binary processing
             } else {

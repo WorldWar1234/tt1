@@ -36,5 +36,6 @@ services:
     command: yarn start
     environment:
       - DEBUG=express
+      - "HOST=localhost:8080"
     ports:
       - "8080:8080"

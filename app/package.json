@@ -8,6 +8,7 @@
     "start": "node ./server.js"
   },
   "dependencies": {
+    "encoding": "^0.1.13",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "lodash.pick": "^4.4.0",

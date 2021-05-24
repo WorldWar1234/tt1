@@ -1,0 +1,10 @@
+{
+  "rewrite" : [
+    "duck.co",
+    "duckduckgo.com",
+    "google.com",
+    "gstatic.com",
+    "wordnik.com",
+    "bing.net"
+  ]
+}
